@@ -23,6 +23,48 @@ match_log = []
 wins = 0
 losses = 0
 
+# Loop for 4 matches
+for i in range(1, 5):
+    print(f"--- MATCH {i} ---")
+    hero_num = int(input("Hero number (0 to skip): "))
+
+    if hero_num == 0:
+        continue
+
+    if 1 <= hero_num <= 5:
+        kills = int(input("Kills: "))
+        deaths = int(input("Deaths: "))
+        assists = int(input("Assists: "))
+        result = input("Result (W/L): ").upper()
+
+        
+        denominator = deaths if deaths != 0 else 1
+        kda = (kills + assists) / denominator
+
+        
+        if kda >= 5 and result == "W":
+            tag = "DOMINATION!"
+        elif kda >= 5 and result == "L":
+            tag = "Carried Hard"
+        elif kda < 5 and result == "W":
+            tag = "Team Effort"
+        else:
+            tag = "Better Luck Next Game"
+
+       
+        if result == "W":
+            wins += 1
+        else:
+            losses += 1
+
+        
+        match_log.append({
+            "hero": heroes[hero_num - 1],
+            "kda": kda,
+            "result": result,
+            "tag": tag
+        })
+
 # Compute win rate and best match
 matches_played = len(match_log)
 win_rate = int((wins / matches_played) * 100) if matches_played > 0 else 0

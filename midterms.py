@@ -37,11 +37,11 @@ for i in range(1, 5):
         assists = int(input("Assists: "))
         result = input("Result (W/L): ").upper()
 
-        
+        # Compute KDA
         denominator = deaths if deaths != 0 else 1
         kda = (kills + assists) / denominator
 
-        
+        # Performance tag
         if kda >= 5 and result == "W":
             tag = "DOMINATION!"
         elif kda >= 5 and result == "L":
@@ -51,13 +51,13 @@ for i in range(1, 5):
         else:
             tag = "Better Luck Next Game"
 
-       
+       # Count results
         if result == "W":
             wins += 1
         else:
             losses += 1
 
-        
+        # Store match
         match_log.append({
             "hero": heroes[hero_num - 1],
             "kda": kda,
